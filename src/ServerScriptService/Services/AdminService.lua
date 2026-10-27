@@ -38,7 +38,11 @@ function AdminService:IsAdmin(player: Player): boolean
 	if Config.Admins.AllowInStudio and RunService:IsStudio() then
 		return true
 	end
-	if Config.Admins.AllowGameCreator and game.CreatorType == Enum.CreatorType.User and game.CreatorId == player.UserId then
+	if
+		Config.Admins.AllowGameCreator
+		and game.CreatorType == Enum.CreatorType.User
+		and game.CreatorId == player.UserId
+	then
 		return true
 	end
 	return false
@@ -53,7 +57,10 @@ local function findTargets(caller: Player, query: string?): { Player }
 		return Players:GetPlayers()
 	end
 	for _, player in Players:GetPlayers() do
-		if string.sub(string.lower(player.Name), 1, #lower) == lower or string.sub(string.lower(player.DisplayName), 1, #lower) == lower then
+		if
+			string.sub(string.lower(player.Name), 1, #lower) == lower
+			or string.sub(string.lower(player.DisplayName), 1, #lower) == lower
+		then
 			return { player }
 		end
 	end
@@ -76,7 +83,11 @@ local function findItem(query: string): RarityTable.Item?
 end
 
 local function reply(player: Player, text: string, ok: boolean?)
-	Services.EventService:Toast(player, "[Admin] " .. text, if ok == false then Color3.fromRGB(255, 90, 100) else Color3.fromRGB(120, 200, 255))
+	Services.EventService:Toast(
+		player,
+		"[Admin] " .. text,
+		if ok == false then Color3.fromRGB(255, 90, 100) else Color3.fromRGB(120, 200, 255)
+	)
 end
 
 local commands: { [string]: (caller: Player, args: { string }) -> () } = {}

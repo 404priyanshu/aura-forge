@@ -182,6 +182,8 @@ RarityTable.Tiers = {
 	},
 } :: { Tier }
 
+-- One aura per line so the table reads like a spreadsheet; keep StyLua from expanding it.
+-- stylua: ignore
 RarityTable.Items = {
 	-- Common
 	{ Name = "Dust", Rarity = "Common", Weight = 50, LuckMultiplier = 1.00, CoinMultiplier = 1.00, Color = Color3.fromRGB(200, 190, 170), Value = 2 },

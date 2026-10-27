@@ -146,7 +146,12 @@ local function sanitizeEquipped(player: Player)
 	DataService:Update(player, "Equipped", function(data)
 		local clean = {}
 		for _, name in data.Equipped do
-			if #clean < slots and Formulas.GetItem(name) and (data.Inventory[name] or 0) > 0 and not table.find(clean, name) then
+			if
+				#clean < slots
+				and Formulas.GetItem(name)
+				and (data.Inventory[name] or 0) > 0
+				and not table.find(clean, name)
+			then
 				table.insert(clean, name)
 			end
 		end
@@ -163,7 +168,11 @@ function InventoryService:Equip(player: Player, itemName: any)
 		return
 	end
 	if #data.Equipped >= getSlots(player) then
-		Services.EventService:Toast(player, "All equip slots are full. Unequip something first.", Color3.fromRGB(255, 190, 60))
+		Services.EventService:Toast(
+			player,
+			"All equip slots are full. Unequip something first.",
+			Color3.fromRGB(255, 190, 60)
+		)
 		return
 	end
 	DataService:Update(player, "Equipped", function(d)

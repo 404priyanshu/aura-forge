@@ -128,7 +128,11 @@ local function autoLoop(player: Player)
 			if not ok then
 				if reason == "NoCoins" then
 					RollService:SetAutoRoll(player, false)
-					Services.EventService:Toast(player, "Auto Roll stopped — not enough coins.", Color3.fromRGB(255, 190, 60))
+					Services.EventService:Toast(
+						player,
+						"Auto Roll stopped — not enough coins.",
+						Color3.fromRGB(255, 190, 60)
+					)
 					break
 				elseif reason == "Loading" then
 					break

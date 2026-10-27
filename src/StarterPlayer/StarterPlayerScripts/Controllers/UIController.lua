@@ -117,7 +117,9 @@ function UIController:_onNotify(kind: string, payload)
 			else ""
 		self.Notifications:Popup({
 			Title = "Welcome back!",
-			Text = `You were away for {Util.Duration(payload.Away)} and earned\n<font color="#ffce4a"><b>{Config.Currencies.Coins.Icon} {Util.Commas(payload.Amount)} coins</b></font>{capped}`,
+			Text = `You were away for {Util.Duration(payload.Away)} and earned\n<font color="#ffce4a"><b>{Config.Currencies.Coins.Icon} {Util.Commas(
+				payload.Amount
+			)} coins</b></font>{capped}`,
 			Color = Config.Currencies.Coins.Color,
 			Button = "Collect",
 		})
@@ -159,7 +161,8 @@ local function installVipChatTag()
 		if source then
 			local speaker = Players:GetPlayerByUserId(source.UserId)
 			if speaker and speaker:GetAttribute("VIP") then
-				properties.PrefixText = `<font color="{Config.VIP.ChatTagColor}">{Config.VIP.ChatTag}</font> {message.PrefixText}`
+				properties.PrefixText =
+					`<font color="{Config.VIP.ChatTagColor}">{Config.VIP.ChatTag}</font> {message.PrefixText}`
 			end
 		end
 		return properties

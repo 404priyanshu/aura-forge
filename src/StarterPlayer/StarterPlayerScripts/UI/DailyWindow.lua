@@ -65,7 +65,10 @@ function DailyWindow.new(root: Instance, ctx)
 		BackgroundTransparency = 1,
 		Parent = content,
 	})
-	UIKit.List(days, { Direction = Enum.FillDirection.Horizontal, Padding = 7, HAlign = Enum.HorizontalAlignment.Center })
+	UIKit.List(
+		days,
+		{ Direction = Enum.FillDirection.Horizontal, Padding = 7, HAlign = Enum.HorizontalAlignment.Center }
+	)
 
 	for day, reward in Config.Daily.Rewards do
 		local card = Create("Frame", {
@@ -114,7 +117,7 @@ function DailyWindow.new(root: Instance, ctx)
 	Create("TextLabel", {
 		Position = UDim2.fromOffset(0, 168),
 		Size = UDim2.new(1, 0, 0, 26),
-		Text = "Playtime Rewards  <font color=\"#9aa0b8\">(this session)</font>",
+		Text = 'Playtime Rewards  <font color="#9aa0b8">(this session)</font>',
 		TextSize = 20,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		Parent = content,
@@ -125,7 +128,10 @@ function DailyWindow.new(root: Instance, ctx)
 		BackgroundTransparency = 1,
 		Parent = content,
 	})
-	UIKit.List(play, { Direction = Enum.FillDirection.Horizontal, Padding = 8, HAlign = Enum.HorizontalAlignment.Center })
+	UIKit.List(
+		play,
+		{ Direction = Enum.FillDirection.Horizontal, Padding = 8, HAlign = Enum.HorizontalAlignment.Center }
+	)
 
 	for index, reward in Config.Playtime.Rewards do
 		local card = Create("Frame", {

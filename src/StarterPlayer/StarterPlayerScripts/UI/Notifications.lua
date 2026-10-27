@@ -201,7 +201,11 @@ function Notifications:_runBanners()
 			Position = UDim2.fromScale(0, -1.1),
 			BackgroundColor3 = Color3.new(1, 1, 1),
 			Gradient = {
-				Color = { Util.Shade(entry.Color, -0.55), Util.Shade(entry.Color, -0.25), Util.Shade(entry.Color, -0.55) },
+				Color = {
+					Util.Shade(entry.Color, -0.55),
+					Util.Shade(entry.Color, -0.25),
+					Util.Shade(entry.Color, -0.55),
+				},
 				Rotation = 0,
 			},
 			Corner = 14,
@@ -234,7 +238,13 @@ function Notifications:_runBanners()
 			end
 		end
 		task.wait(Config.UI.AnnouncementDuration)
-		UIKit.Tween(banner, 0.3, { Position = UDim2.fromScale(0, -1.1) }, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+		UIKit.Tween(
+			banner,
+			0.3,
+			{ Position = UDim2.fromScale(0, -1.1) },
+			Enum.EasingStyle.Quad,
+			Enum.EasingDirection.In
+		)
 		task.wait(0.3)
 		banner:Destroy()
 	end

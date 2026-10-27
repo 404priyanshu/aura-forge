@@ -154,7 +154,8 @@ function RollReveal.new(root: Instance, audio)
 		Parent = stage,
 	})
 	UIKit.TextStroke(self.TierLabel, Color3.new(0, 0, 0), 2)
-	self.TierGradient = UIKit.Gradient(self.TierLabel, { Color = { Color3.new(1, 1, 1), Color3.new(1, 1, 1) }, Rotation = 0 })
+	self.TierGradient =
+		UIKit.Gradient(self.TierLabel, { Color = { Color3.new(1, 1, 1), Color3.new(1, 1, 1) }, Rotation = 0 })
 
 	self.OddsLabel = Create("TextLabel", {
 		Name = "Odds",
@@ -228,7 +229,8 @@ function RollReveal:_shake(intensity: number, duration: number, cameraShake: boo
 			return
 		end
 		local magnitude = intensity * (1 - elapsed / duration)
-		self.Stage.Position = UDim2.fromOffset(random:NextNumber(-1, 1) * magnitude * 10, random:NextNumber(-1, 1) * magnitude * 10)
+		self.Stage.Position =
+			UDim2.fromOffset(random:NextNumber(-1, 1) * magnitude * 10, random:NextNumber(-1, 1) * magnitude * 10)
 		local camera = Workspace.CurrentCamera
 		if cameraShake and camera then
 			camera.CFrame *= CFrame.Angles(
@@ -335,7 +337,10 @@ function RollReveal:ShowCompact(result)
 	if not item then
 		return
 	end
-	self.Compact.Text = `{if result.IsNew then "🆕 " else ""}<font color="#{tier.Color:ToHex()}">{item.Name}</font>  ·  {tier.Name}  ·  {Util.Odds(result.BaseChance)}`
+	self.Compact.Text =
+		`{if result.IsNew then "🆕 " else ""}<font color="#{tier.Color:ToHex()}">{item.Name}</font>  ·  {tier.Name}  ·  {Util.Odds(
+			result.BaseChance
+		)}`
 	self.CompactStroke.Color = tier.Color
 	self.Compact.Visible = true
 	UIKit.Pop(self.Compact, 0.85)
@@ -418,8 +423,12 @@ function RollReveal:Play(result, options: PlayOptions)
 	self.NameStroke.Color = Util.Shade(tier.Color, -0.6)
 	self.TierLabel.Text = tier.Name:upper()
 	self.TierGradient.Color = ColorSequence.new(Util.Shade(tier.Color, 0.45), tier.Color)
-	local luckText = if result.Luck and result.Luck > 1.001 then `  ·  🍀 x{string.format("%.2f", result.Luck)}` else ""
-	local payoutText = if result.Payout and result.Payout > 0 then `  ·  +{Util.Abbreviate(result.Payout)} 🪙` else ""
+	local luckText = if result.Luck and result.Luck > 1.001
+		then `  ·  🍀 x{string.format("%.2f", result.Luck)}`
+		else ""
+	local payoutText = if result.Payout and result.Payout > 0
+		then `  ·  +{Util.Abbreviate(result.Payout)} 🪙`
+		else ""
 	self.OddsLabel.Text = Util.Odds(result.BaseChance) .. luckText .. payoutText
 	self.NewBadge.Visible = result.IsNew == true
 
@@ -439,7 +448,12 @@ function RollReveal:Play(result, options: PlayOptions)
 				ray.BackgroundColor3 = tier.Color
 			end
 		end
-		UIKit.Tween(self.Rays, 0.5, { Size = UDim2.fromOffset(300 + tierIndex * 40, 300 + tierIndex * 40) }, Enum.EasingStyle.Back)
+		UIKit.Tween(
+			self.Rays,
+			0.5,
+			{ Size = UDim2.fromOffset(300 + tierIndex * 40, 300 + tierIndex * 40) },
+			Enum.EasingStyle.Back
+		)
 		self:_spinRays(true)
 	end
 	for i, ring in self.Rings do

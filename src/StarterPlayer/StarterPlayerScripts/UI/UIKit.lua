@@ -310,12 +310,18 @@ function UIKit.Button(props: ButtonProps): TextButton
 		UIKit.Tween(scale, 0.12, { Scale = 1 })
 	end)
 	button.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		if
+			input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch
+		then
 			UIKit.Tween(scale, 0.08, { Scale = 0.93 })
 		end
 	end)
 	button.InputEnded:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		if
+			input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch
+		then
 			UIKit.Tween(scale, 0.2, { Scale = 1 }, Enum.EasingStyle.Back)
 		end
 	end)
@@ -344,7 +350,10 @@ export type Window = {
 }
 
 -- Modal window. Clicking the dimmed backdrop or the X closes it.
-function UIKit.Window(parent: Instance, opts: { Name: string, Title: string, Icon: string?, Size: UDim2?, Accent: Color3? }): Window
+function UIKit.Window(
+	parent: Instance,
+	opts: { Name: string, Title: string, Icon: string?, Size: UDim2?, Accent: Color3? }
+): Window
 	local accent = opts.Accent or Theme.Accent
 
 	local overlay: TextButton = UIKit.Create("TextButton", {
@@ -462,7 +471,10 @@ end
 
 export type ProgressBar = { Frame: Frame, Fill: Frame, Label: TextLabel, Set: (alpha: number, text: string?) -> () }
 
-function UIKit.ProgressBar(parent: Instance, props: { Size: UDim2?, Position: UDim2?, Color: Color3?, LayoutOrder: number? }): ProgressBar
+function UIKit.ProgressBar(
+	parent: Instance,
+	props: { Size: UDim2?, Position: UDim2?, Color: Color3?, LayoutOrder: number? }
+): ProgressBar
 	local frame: Frame = UIKit.Create("Frame", {
 		Name = "Progress",
 		Size = props.Size or UDim2.new(1, 0, 0, 18),
@@ -506,7 +518,16 @@ end
 
 export type Toggle = { Frame: Frame, Set: (value: boolean) -> () }
 
-function UIKit.Toggle(parent: Instance, props: { Text: string, Description: string?, Value: boolean, LayoutOrder: number?, OnChanged: (boolean) -> () }): Toggle
+function UIKit.Toggle(
+	parent: Instance,
+	props: {
+		Text: string,
+		Description: string?,
+		Value: boolean,
+		LayoutOrder: number?,
+		OnChanged: (boolean) -> (),
+	}
+): Toggle
 	local row: Frame = UIKit.Create("Frame", {
 		Name = props.Text,
 		Size = UDim2.new(1, 0, 0, 64),
@@ -588,7 +609,10 @@ end
 export type Tabs = { Bar: Frame, Select: (name: string) -> (), Selected: string }
 
 -- Horizontal tab strip. onSelect(name) fires when a tab is picked.
-function UIKit.Tabs(parent: Instance, props: { Names: { string }, Position: UDim2?, Size: UDim2?, OnSelect: (string) -> () }): Tabs
+function UIKit.Tabs(
+	parent: Instance,
+	props: { Names: { string }, Position: UDim2?, Size: UDim2?, OnSelect: (string) -> () }
+): Tabs
 	local bar: Frame = UIKit.Create("Frame", {
 		Name = "Tabs",
 		Size = props.Size or UDim2.new(1, 0, 0, 40),

@@ -112,7 +112,9 @@ function QuestsWindow:Render()
 		local quest = row.Quest
 		local state = states[id] or { Progress = 0, Level = 0, Done = false }
 		local goal = Formulas.QuestGoal(quest, state.Level)
-		local levelText = if quest.Repeatable and state.Level > 0 then `  <font color="#9aa0b8">Lv.{state.Level + 1}</font>` else ""
+		local levelText = if quest.Repeatable and state.Level > 0
+			then `  <font color="#9aa0b8">Lv.{state.Level + 1}</font>`
+			else ""
 		row.Title.Text = Formulas.QuestTitle(quest, state.Level, Util.Duration) .. levelText
 		row.Reward.Text = "🎁 " .. Formulas.DescribeReward(Formulas.QuestReward(quest, state.Level), Util.Abbreviate)
 
@@ -123,7 +125,10 @@ function QuestsWindow:Render()
 			row.Claim.Active = false
 		else
 			local ready = state.Progress >= goal
-			row.Bar.Set(state.Progress / goal, `{formatProgress(quest, state.Progress)} / {formatProgress(quest, goal)}`)
+			row.Bar.Set(
+				state.Progress / goal,
+				`{formatProgress(quest, state.Progress)} / {formatProgress(quest, goal)}`
+			)
 			row.Claim.Text = if ready then "Claim!" else "In progress"
 			row.Claim.TextSize = if ready then 20 else 15
 			row.Claim.BackgroundColor3 = if ready then Theme.Success else Theme.Disabled

@@ -51,12 +51,19 @@ rojo build default.project.json -o AuraForge.rbxlx
 
 Then publish the place and turn on **Game Settings → Security → Enable Studio Access to API Services**. [SETUP.md](SETUP.md) covers the full checklist: where every file goes, which IDs and audio to replace, and a play-test walkthrough.
 
-## Type checking & linting
+## Formatting, type checking & linting
 
-Every push and pull request runs [luau-lsp](https://github.com/JohnnyMorganz/luau-lsp) against the Roblox API, then [selene](https://github.com/Kampfkarren/selene) (see [`.github/workflows/luau-lsp.yml`](.github/workflows/luau-lsp.yml)). Selene warnings fail the build too. To run the same checks locally:
+Every push and pull request runs three checks (see [`.github/workflows/luau-lsp.yml`](.github/workflows/luau-lsp.yml)):
+
+- [StyLua](https://github.com/JohnnyMorganz/StyLua) formatting check ([`stylua.toml`](stylua.toml))
+- [luau-lsp](https://github.com/JohnnyMorganz/luau-lsp) type check against the Roblox API
+- [selene](https://github.com/Kampfkarren/selene) lint ([`selene.toml`](selene.toml)); warnings fail the build too
+
+To run them locally:
 
 ```bash
 rokit install
+stylua src            # formats in place (CI runs `stylua --check src`)
 ./scripts/analyze.sh
 selene src
 ```

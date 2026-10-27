@@ -181,7 +181,8 @@ local function onClick(player: Player)
 		bucket = { Tokens = Config.Click.MaxBurst, Last = now, Strikes = 0 }
 		clickBuckets[player] = bucket
 	end
-	bucket.Tokens = math.min(Config.Click.MaxBurst, bucket.Tokens + (now - bucket.Last) * Config.Click.MaxClicksPerSecond)
+	bucket.Tokens =
+		math.min(Config.Click.MaxBurst, bucket.Tokens + (now - bucket.Last) * Config.Click.MaxClicksPerSecond)
 	bucket.Last = now
 	if bucket.Tokens < 1 then
 		bucket.Strikes += 1
@@ -272,7 +273,10 @@ function EconomyService:IsInAfkZone(player: Player): boolean
 	end
 	local relative = afkZone.CFrame:PointToObjectSpace((root :: BasePart).Position)
 	local half = afkZone.Size / 2
-	return math.abs(relative.X) <= half.X and math.abs(relative.Z) <= half.Z and relative.Y >= -half.Y - 1 and relative.Y <= half.Y + 4
+	return math.abs(relative.X) <= half.X
+		and math.abs(relative.Z) <= half.Z
+		and relative.Y >= -half.Y - 1
+		and relative.Y <= half.Y + 4
 end
 
 ---------------------------------------------------------------------------
@@ -297,9 +301,16 @@ local function tickPlayer(player: Player, now: number)
 			EconomyService:AddCoins(player, Config.AFK.CoinsPerSecond, "AFK")
 			data.Stats.AfkTime += 1
 			EconomyService.AfkTick:Fire(player, 1)
-			if (seconds - Config.AFK.WarmupSeconds) > 0 and (seconds - Config.AFK.WarmupSeconds) % Config.AFK.GemInterval == 0 then
+			if
+				(seconds - Config.AFK.WarmupSeconds) > 0
+				and (seconds - Config.AFK.WarmupSeconds) % Config.AFK.GemInterval == 0
+			then
 				EconomyService:AddGems(player, Config.AFK.GemsPerInterval)
-				Services.EventService:Toast(player, `💎 +{Config.AFK.GemsPerInterval} Gem for staying AFK!`, Config.Currencies.Gems.Color)
+				Services.EventService:Toast(
+					player,
+					`💎 +{Config.AFK.GemsPerInterval} Gem for staying AFK!`,
+					Config.Currencies.Gems.Color
+				)
 			end
 		end
 	else

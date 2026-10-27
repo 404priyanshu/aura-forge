@@ -52,7 +52,10 @@ function InventoryWindow.new(root: Instance, ctx)
 		ScrollBarThickness = 4,
 		Parent = content,
 	})
-	UIKit.List(strip, { Direction = Enum.FillDirection.Horizontal, Padding = 6, VAlign = Enum.VerticalAlignment.Center })
+	UIKit.List(
+		strip,
+		{ Direction = Enum.FillDirection.Horizontal, Padding = 6, VAlign = Enum.VerticalAlignment.Center }
+	)
 
 	for index, tier in RarityTable.Tiers do
 		local chip = Create("TextButton", {

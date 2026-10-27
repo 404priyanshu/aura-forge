@@ -158,9 +158,27 @@ Config.VIP = {
 export type PassInfo = { Id: number, Name: string, Description: string, Icon: string, Order: number }
 Config.Gamepasses = {
 	LuckX2 = { Id = 0, Name = "2x Luck", Description = "Permanently doubles your luck.", Icon = "🍀", Order = 1 },
-	AutoRoll = { Id = 0, Name = "Auto Roll", Description = "Roll automatically, even while you grind.", Icon = "🔁", Order = 2 },
-	FastRoll = { Id = 0, Name = "Fast Roll", Description = "Much faster roll animations & cooldown.", Icon = "⚡", Order = 3 },
-	ExtraSlots = { Id = 0, Name = "+2 Equip Slots", Description = "Equip two more auras at once.", Icon = "🎒", Order = 4 },
+	AutoRoll = {
+		Id = 0,
+		Name = "Auto Roll",
+		Description = "Roll automatically, even while you grind.",
+		Icon = "🔁",
+		Order = 2,
+	},
+	FastRoll = {
+		Id = 0,
+		Name = "Fast Roll",
+		Description = "Much faster roll animations & cooldown.",
+		Icon = "⚡",
+		Order = 3,
+	},
+	ExtraSlots = {
+		Id = 0,
+		Name = "+2 Equip Slots",
+		Description = "Equip two more auras at once.",
+		Icon = "🎒",
+		Order = 4,
+	},
 	VIP = { Id = 0, Name = "VIP", Description = "Gold chat tag and 1.25x coins forever.", Icon = "👑", Order = 5 },
 } :: { [string]: PassInfo }
 

@@ -90,7 +90,8 @@ local function loadPasses(player: Player, data)
 		if data.Gamepasses[passKey] then
 			owned[passKey] = true
 		elseif pass.Id ~= 0 then
-			local ok, result = pcall(MarketplaceService.UserOwnsGamePassAsync, MarketplaceService, player.UserId, pass.Id)
+			local ok, result =
+				pcall(MarketplaceService.UserOwnsGamePassAsync, MarketplaceService, player.UserId, pass.Id)
 			if ok and result then
 				owned[passKey] = true
 			elseif not ok then

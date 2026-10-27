@@ -189,7 +189,10 @@ function Formulas.ComputeLuck(input: LuckInput): (number, { { Label: string, Val
 	end
 	if equipBonus > 0 then
 		luck *= 1 + equipBonus
-		table.insert(breakdown, { Label = "Equipped", Value = string.format("+%d%%", math.floor(equipBonus * 100 + 0.5)) })
+		table.insert(
+			breakdown,
+			{ Label = "Equipped", Value = string.format("+%d%%", math.floor(equipBonus * 100 + 0.5)) }
+		)
 	end
 
 	if input.HasLuckPass then

@@ -18,10 +18,11 @@ env:
   ROJO_VERSION: 7.7.1
   LUAU_LSP_VERSION: 1.70.1
   SELENE_VERSION: 0.32.0
+  STYLUA_VERSION: 2.6.0
 
 jobs:
   analyze:
-    name: Type check & lint
+    name: Format, type check & lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -34,10 +35,11 @@ jobs:
             ~/.local/bin/rojo
             ~/.local/bin/luau-lsp
             ~/.local/bin/selene
+            ~/.local/bin/stylua
             .cache
-          key: luau-tools-${{ runner.os }}-rojo${{ env.ROJO_VERSION }}-lsp${{ env.LUAU_LSP_VERSION }}-selene${{ env.SELENE_VERSION }}
+          key: luau-tools-${{ runner.os }}-rojo${{ env.ROJO_VERSION }}-lsp${{ env.LUAU_LSP_VERSION }}-selene${{ env.SELENE_VERSION }}-stylua${{ env.STYLUA_VERSION }}
 
-      - name: Install Rojo, luau-lsp and selene
+      - name: Install Rojo, luau-lsp, selene and StyLua
         run: |
           mkdir -p ~/.local/bin
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
@@ -55,8 +57,18 @@ jobs:
             curl -fsSL -o selene.zip "https://github.com/Kampfkarren/selene/releases/download/${SELENE_VERSION}/selene-${SELENE_VERSION}-linux.zip"
             unzip -o -q selene.zip -d selene && install selene/selene ~/.local/bin/selene
           fi
+          if [[ ! -x ~/.local/bin/stylua ]]; then
+            curl -fsSL -o stylua.zip "https://github.com/JohnnyMorganz/StyLua/releases/download/v${STYLUA_VERSION}/stylua-linux-x86_64.zip"
+            unzip -o -q stylua.zip -d stylua && install stylua/stylua ~/.local/bin/stylua
+          fi
+
+      # The check steps below all run even if an earlier one fails, so one run reports everything.
+      - name: Check formatting (StyLua)
+        # Rules: stylua.toml. Fix locally with `stylua src`.
+        run: stylua --check src
 
       - name: Run luau-lsp analyze
+        if: ${{ !cancelled() }}
         run: ./scripts/analyze.sh
 
       - name: Lint (selene)

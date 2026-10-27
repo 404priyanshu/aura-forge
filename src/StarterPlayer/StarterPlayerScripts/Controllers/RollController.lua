@@ -83,7 +83,10 @@ function RollController:RequestRoll()
 	elseif currency.Coins < cost then
 		shakeButton(self.Hud.RollButton)
 		self.Controllers.AudioController:Play("Error")
-		self:_toast(`Not enough coins! Rolling costs {Util.Commas(cost)} — click EARN or visit the AFK zone.`, Theme.Danger)
+		self:_toast(
+			`Not enough coins! Rolling costs {Util.Commas(cost)} — click EARN or visit the AFK zone.`,
+			Theme.Danger
+		)
 		return
 	end
 
@@ -166,7 +169,8 @@ function RollController:_renderInfo()
 	local tokens = currency.RerollTokens or 0
 
 	if useToken then
-		hud.CostLabel.Text = `Cost: {Config.Currencies.RerollTokens.Icon} 1  <font color="#c08cff">(x{Config.Roll.RerollTokenLuck} luck)</font>`
+		hud.CostLabel.Text =
+			`Cost: {Config.Currencies.RerollTokens.Icon} 1  <font color="#c08cff">(x{Config.Roll.RerollTokenLuck} luck)</font>`
 	else
 		hud.CostLabel.Text = `Cost: {Config.Currencies.Coins.Icon} {Util.Commas(cost)}`
 	end

@@ -81,7 +81,13 @@ function CurrencyController:_bindCurrency(key: string, pill)
 		TweenService:Create(counter, TweenInfo.new(0.45, Enum.EasingStyle.Quad), { Value = target }):Play()
 		if target > previous then
 			UIKit.Pop(pill.Frame, 0.94)
-			self:_floatText(pill.Frame, "+" .. Util.Abbreviate(target - previous), Config.Currencies[key].Color, UDim2.new(1, 50, 0.5, 0), 18)
+			self:_floatText(
+				pill.Frame,
+				"+" .. Util.Abbreviate(target - previous),
+				Config.Currencies[key].Color,
+				UDim2.new(1, 50, 0.5, 0),
+				18
+			)
 		end
 	end)
 end
@@ -128,7 +134,8 @@ function CurrencyController:Start()
 		hud.AfkChip.Visible = inZone
 		if inZone then
 			local multiplier = self.Controllers.DataController:GetLive("CoinMultiplier") or 1
-			hud.AfkLabel.Text = `💤 AFK ZONE  ·  +{Util.Abbreviate(Config.AFK.CoinsPerSecond * multiplier)} coins/sec`
+			hud.AfkLabel.Text =
+				`💤 AFK ZONE  ·  +{Util.Abbreviate(Config.AFK.CoinsPerSecond * multiplier)} coins/sec`
 			UIKit.Pop(hud.AfkChip, 0.8)
 		end
 	end

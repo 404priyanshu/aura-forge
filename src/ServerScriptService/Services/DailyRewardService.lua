@@ -54,7 +54,11 @@ function DailyRewardService:ClaimDaily(player: Player)
 	local now = os.time()
 	local canClaim, newStreak, cycleDay = self:GetDailyState(data, now)
 	if not canClaim then
-		Services.EventService:Toast(player, "Already claimed today — come back tomorrow!", Color3.fromRGB(255, 190, 60))
+		Services.EventService:Toast(
+			player,
+			"Already claimed today — come back tomorrow!",
+			Color3.fromRGB(255, 190, 60)
+		)
 		return
 	end
 	DataService:Update(player, "Daily", function(d)
@@ -127,7 +131,11 @@ function DailyRewardService:Start()
 		if canClaim then
 			task.delay(4, function()
 				if player.Parent then
-					Services.EventService:Toast(player, "🎁 Your daily reward is ready!", Color3.fromRGB(255, 190, 60))
+					Services.EventService:Toast(
+						player,
+						"🎁 Your daily reward is ready!",
+						Color3.fromRGB(255, 190, 60)
+					)
 				end
 			end)
 		end
