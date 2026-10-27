@@ -1,0 +1,7 @@
+# Toolchain pinned for this project (https://github.com/rojo-rbx/rokit).
+# Run `rokit install` to get these exact versions locally.
+# CI (.github/workflows/luau-lsp.yml) installs the same versions.
+
+[tools]
+rojo = "rojo-rbx/rojo@7.7.1"
+luau-lsp = "JohnnyMorganz/luau-lsp@1.70.1"

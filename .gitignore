@@ -7,3 +7,6 @@ sourcemap.json
 
 # OS
 .DS_Store
+
+# Local tool caches (scripts/analyze.sh)
+.cache/

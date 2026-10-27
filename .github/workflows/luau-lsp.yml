@@ -1,0 +1,53 @@
+name: luau-lsp
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: luau-lsp-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Keep in sync with rokit.toml.
+  ROJO_VERSION: 7.7.1
+  LUAU_LSP_VERSION: 1.70.1
+
+jobs:
+  analyze:
+    name: Type check (luau-lsp)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache tools and type definitions
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.local/bin/rojo
+            ~/.local/bin/luau-lsp
+            .cache
+          key: luau-tools-${{ runner.os }}-rojo${{ env.ROJO_VERSION }}-lsp${{ env.LUAU_LSP_VERSION }}
+
+      - name: Install Rojo and luau-lsp
+        run: |
+          mkdir -p ~/.local/bin
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          cd "$RUNNER_TEMP"
+          if [[ ! -x ~/.local/bin/rojo ]]; then
+            curl -fsSL -o rojo.zip "https://github.com/rojo-rbx/rojo/releases/download/v${ROJO_VERSION}/rojo-${ROJO_VERSION}-linux-x86_64.zip"
+            unzip -o -q rojo.zip -d rojo && install rojo/rojo ~/.local/bin/rojo
+          fi
+          if [[ ! -x ~/.local/bin/luau-lsp ]]; then
+            curl -fsSL -o luau-lsp.zip "https://github.com/JohnnyMorganz/luau-lsp/releases/download/${LUAU_LSP_VERSION}/luau-lsp-linux-x86_64.zip"
+            unzip -o -q luau-lsp.zip -d luau-lsp && install luau-lsp/luau-lsp ~/.local/bin/luau-lsp
+          fi
+
+      - name: Run luau-lsp analyze
+        run: ./scripts/analyze.sh

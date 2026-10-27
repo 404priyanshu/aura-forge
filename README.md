@@ -1,5 +1,7 @@
 # Aura Forge
 
+[![luau-lsp](https://github.com/404priyanshu/aura-forge/actions/workflows/luau-lsp.yml/badge.svg)](https://github.com/404priyanshu/aura-forge/actions/workflows/luau-lsp.yml)
+
 An RNG/gacha game for Roblox, written in Luau. Players grind coins, roll for auras across ten rarity tiers (up to a **1 in 10,000,000** Secret), equip their best pulls to boost their luck and coin rate, then roll again.
 
 **grind → roll → pull rare → equip for multipliers → grind faster → roll more**
@@ -48,6 +50,15 @@ rojo build default.project.json -o AuraForge.rbxlx
 ```
 
 Then publish the place and turn on **Game Settings → Security → Enable Studio Access to API Services**. [SETUP.md](SETUP.md) covers the full checklist: where every file goes, which IDs and audio to replace, and a play-test walkthrough.
+
+## Type checking
+
+Every push and pull request runs [luau-lsp](https://github.com/JohnnyMorganz/luau-lsp) against the Roblox API (see [`.github/workflows/luau-lsp.yml`](.github/workflows/luau-lsp.yml)). To run the same check locally:
+
+```bash
+rokit install
+./scripts/analyze.sh
+```
 
 ## Rebalancing
 
