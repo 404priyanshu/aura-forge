@@ -564,12 +564,42 @@ Config.Audio = {
 -- Leave "" to keep showing the emoji Icon defined above.
 ---------------------------------------------------------------------------
 Config.Images = {
-	Currencies = { Coins = "", Gems = "", RerollTokens = "" },
-	Menu = { Inventory = "", Shop = "", Quests = "", Daily = "", Settings = "" },
-	Gamepasses = { LuckX2 = "", AutoRoll = "", FastRoll = "", ExtraSlots = "", VIP = "" },
-	DevProducts = { LuckPotion = "", CoinsSmall = "", CoinsMedium = "", CoinsLarge = "", RerollTokens = "" },
-	Boosts = { LuckPotion = "", LuckyBrew = "", CoinCharm = "" },
-	GemShop = { LuckyBrew = "", CoinCharm = "", Token = "" },
+	Currencies = {
+		Coins = "rbxassetid://124965042686750", -- currency-coins
+		Gems = "rbxassetid://82240142504345", -- currency-gems
+		RerollTokens = "rbxassetid://120113800463373", -- currency-tokens
+	},
+	Menu = {
+		Inventory = "rbxassetid://78297132795097", -- menu-inventory
+		Shop = "rbxassetid://81186941665455", -- menu-shop
+		Quests = "rbxassetid://72741583253548", -- menu-quests
+		Daily = "rbxassetid://103572740139786", -- menu-daily
+		Settings = "rbxassetid://76076282865193", -- menu-settings
+	},
+	Gamepasses = {
+		LuckX2 = "rbxassetid://108230926265523", -- pass-luck
+		AutoRoll = "rbxassetid://81581662352952", -- pass-autoroll
+		FastRoll = "rbxassetid://97238118748475", -- pass-fastroll
+		ExtraSlots = "rbxassetid://74359817318714", -- pass-slots
+		VIP = "rbxassetid://74161445921086", -- pass-vip
+	},
+	DevProducts = {
+		LuckPotion = "rbxassetid://87131340989635", -- product-luckpotion
+		CoinsSmall = "rbxassetid://82151062445815", -- product-coins-small
+		CoinsMedium = "rbxassetid://104933417298600", -- product-coins-medium
+		CoinsLarge = "rbxassetid://102329603787370", -- product-coins-large
+		RerollTokens = "rbxassetid://120113800463373", -- currency-tokens (reused)
+	},
+	Boosts = {
+		LuckPotion = "rbxassetid://87131340989635", -- product-luckpotion (reused)
+		LuckyBrew = "rbxassetid://127735531085754", -- boost-luckybrew
+		CoinCharm = "rbxassetid://95204764106842", -- boost-coincharm
+	},
+	GemShop = {
+		LuckyBrew = "rbxassetid://127735531085754", -- boost-luckybrew (reused)
+		CoinCharm = "rbxassetid://95204764106842", -- boost-coincharm (reused)
+		Token = "rbxassetid://120113800463373", -- currency-tokens (reused)
+	},
 } :: { [string]: { [string]: string } }
 
 ---------------------------------------------------------------------------
