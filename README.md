@@ -72,6 +72,10 @@ selene src
 
 Every tunable number is in [`Config.lua`](src/ReplicatedStorage/Modules/Config.lua): costs, cooldowns, rewards, quests, gamepass/product IDs, Luck Hour timing and audio. Rarity tiers and auras are in [`RarityTable.lua`](src/ReplicatedStorage/Modules/RarityTable.lua). Both files are commented, so you can rebalance without touching any game logic.
 
+## Art & audio assets
+
+[docs/ASSET_PROMPTS.md](docs/ASSET_PROMPTS.md) has ready-to-use prompts for generating the game's icons, thumbnails, aura effects, world props, music and sound effects. It also covers which tools to use and where each finished asset goes in the game. The current icon and thumbnails are in [`assets/marketing`](assets/marketing).
+
 ## Admin commands
 
 Admins are the UserIds in `Config.Admins`, the place owner, and everyone during a Studio play-test.
