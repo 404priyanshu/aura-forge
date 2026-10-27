@@ -66,3 +66,7 @@ Admins are the UserIds in `Config.Admins`, the place owner, and everyone during 
 | `/giveitem <item name>` | Give yourself an aura |
 | `/luckhour [minutes]` | Start a Luck Hour on this server |
 | `/resettutorial [player]` | Replay the tutorial |
+
+## License
+
+[MIT](LICENSE) © 404priyanshu. The bundled [ProfileService](third_party/ProfileService) keeps its own Apache-2.0 license.
