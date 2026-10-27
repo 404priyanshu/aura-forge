@@ -1,0 +1,9 @@
+# Rojo / Studio build outputs
+*.rbxl
+*.rbxlx
+*.rbxl.lock
+*.rbxlx.lock
+sourcemap.json
+
+# OS
+.DS_Store
