@@ -12,7 +12,7 @@ An RNG/gacha game for Roblox: grind coins, roll auras, chase the 1 in 10,000,000
 | **Data** | | |
 | ReplicatedStorage/Modules/ProfileTemplate | ModuleScript | `src/ReplicatedStorage/Modules/ProfileTemplate.lua` |
 | ServerScriptService/Services/DataService | ModuleScript | `src/ServerScriptService/Services/DataService.lua` |
-| ServerScriptService/Packages/ProfileService | ModuleScript | **You add this** (see step 2) |
+| ServerScriptService/Packages/ProfileService | ModuleScript | `src/ServerScriptService/Packages/ProfileService.lua` (bundled, see step 2) |
 | StarterPlayerScripts/Controllers/DataController | ModuleScript | `src/StarterPlayer/StarterPlayerScripts/Controllers/DataController.lua` |
 | **Shared** | | |
 | ReplicatedStorage/Modules/Formulas | ModuleScript | `src/ReplicatedStorage/Modules/Formulas.lua` |
@@ -54,10 +54,11 @@ StarterPlayerScripts means `StarterPlayer/StarterPlayerScripts`.
 
 ## 2. Things you must create by hand
 
-1. **ProfileService** (required). Get the ModuleScript from
-   <https://github.com/MadStudioRoblox/ProfileService> (the `ProfileService.lua` file) or the
-   official Creator Store model, and place it at `ServerScriptService/Packages/ProfileService`.
-   The game errors with a clear message on startup if it's missing.
+1. **ProfileService** is already bundled at `src/ServerScriptService/Packages/ProfileService.lua`
+   (unmodified, pinned commit and Apache-2.0 license in `third_party/ProfileService/`). With Rojo
+   there's nothing to do. If you copy-paste instead, create a `Packages` Folder in
+   ServerScriptService and a ModuleScript named `ProfileService` inside it. The game errors with a
+   clear message on startup if it's missing.
 2. **RemoteEvents:** nothing to do. `Net.Setup()` creates every remote inside
    `ReplicatedStorage/Remotes` when the server starts.
 3. **AFK zone (optional):** a glowing zone is generated at `Config.AFK.ZonePosition`. To place it
@@ -74,8 +75,6 @@ plugin, or build a place file directly:
 ```bash
 rojo build default.project.json -o AuraForge.rbxlx
 ```
-
-Then add ProfileService (step 2.1) to the place.
 
 **Option B: copy and paste.** Create each instance from the table above with the exact name and type,
 then paste the file contents in.

@@ -35,7 +35,7 @@ Each service and controller is a ModuleScript with `Init()` and `Start()`. They 
 
 ## Quick start
 
-You need [Rojo](https://rojo.space) 7.x, plus [ProfileService](https://github.com/MadStudioRoblox/ProfileService) placed at `src/ServerScriptService/Packages/ProfileService.lua`.
+You need [Rojo](https://rojo.space) 7.x. [ProfileService](https://github.com/MadStudioRoblox/ProfileService) is bundled in `src/ServerScriptService/Packages/` (Apache-2.0, see [`third_party/ProfileService`](third_party/ProfileService)).
 
 ```bash
 rojo serve
