@@ -75,7 +75,7 @@ function ShopWindow.new(root: Instance, ctx)
 	local gemPage = makePage("Gem Shop")
 
 	for index, row in sortedEntries(Config.Gamepasses) do
-		local button = self:_card(passPage, row.Entry, index, function()
+		local button = self:_card(passPage, row.Entry, index, Config.Images.Gamepasses[row.Key], function()
 			self:_buyPass(row.Key, row.Entry)
 		end)
 		self.PassButtons[row.Key] = button
@@ -83,14 +83,14 @@ function ShopWindow.new(root: Instance, ctx)
 	end
 
 	for index, row in sortedEntries(Config.DevProducts) do
-		local button = self:_card(productPage, row.Entry, index, function()
+		local button = self:_card(productPage, row.Entry, index, Config.Images.DevProducts[row.Key], function()
 			self:_buyProduct(row.Entry)
 		end)
 		self:_loadPrice(button, row.Entry.Id, Enum.InfoType.Product)
 	end
 
 	for index, entry in Config.GemShop do
-		local button = self:_card(gemPage, entry, index, function()
+		local button = self:_card(gemPage, entry, index, Config.Images.GemShop[entry.Id], function()
 			Net.Event("BuyGemItem"):FireServer(entry.Id)
 		end)
 		button.Text = `{Config.Currencies.Gems.Icon} {entry.Price}`
@@ -114,7 +114,7 @@ function ShopWindow.new(root: Instance, ctx)
 	return self
 end
 
-function ShopWindow:_card(parent: Instance, entry, order: number, onBuy: () -> ()): TextButton
+function ShopWindow:_card(parent: Instance, entry, order: number, image: string?, onBuy: () -> ()): TextButton
 	local card = Create("Frame", {
 		Name = entry.Name,
 		BackgroundColor3 = Theme.PanelLight,
@@ -124,11 +124,13 @@ function ShopWindow:_card(parent: Instance, entry, order: number, onBuy: () -> (
 		Parent = parent,
 	})
 	UIKit.Gradient(card, { Color = { Color3.new(1, 1, 1), Color3.fromRGB(210, 210, 225) }, Rotation = 90 })
-	Create("TextLabel", {
+	UIKit.Icon({
+		Image = image,
+		Emoji = entry.Icon,
 		Size = UDim2.new(1, 0, 0, 44),
 		Position = UDim2.fromOffset(0, 8),
-		Text = entry.Icon,
 		TextSize = 36,
+		ImageScale = 1,
 		Parent = card,
 	})
 	Create("TextLabel", {

@@ -18,6 +18,10 @@
 	  Particles     UI spark count on reveal.
 	  Sound         Config.Audio.Sfx key played on reveal.
 	  AuraRate      ParticleEmitter rate of the aura around the character.
+	  Texture       Optional particle texture ID for this tier's aura and reveal
+	                burst ("" = Config.Particles.DefaultTexture).
+	  SparkleTexture Optional twinkle-layer texture ID
+	                ("" = Config.Particles.DefaultSparkleTexture).
 
 	ITEMS
 	  Name            Unique display name (also the save key — renaming an item
@@ -44,6 +48,8 @@ export type Tier = {
 	Particles: number,
 	Sound: string,
 	AuraRate: number,
+	Texture: string,
+	SparkleTexture: string,
 }
 
 export type Item = {
@@ -71,6 +77,8 @@ RarityTable.Tiers = {
 		Particles = 6,
 		Sound = "RevealSmall",
 		AuraRate = 4,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Uncommon",
@@ -83,6 +91,8 @@ RarityTable.Tiers = {
 		Particles = 10,
 		Sound = "RevealSmall",
 		AuraRate = 6,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Rare",
@@ -95,6 +105,8 @@ RarityTable.Tiers = {
 		Particles = 16,
 		Sound = "RevealSmall",
 		AuraRate = 10,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Epic",
@@ -107,6 +119,8 @@ RarityTable.Tiers = {
 		Particles = 24,
 		Sound = "Fanfare",
 		AuraRate = 16,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Legendary",
@@ -119,6 +133,8 @@ RarityTable.Tiers = {
 		Particles = 36,
 		Sound = "Fanfare",
 		AuraRate = 24,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Mythic",
@@ -131,6 +147,8 @@ RarityTable.Tiers = {
 		Particles = 48,
 		Sound = "RevealBig",
 		AuraRate = 34,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Exotic",
@@ -143,6 +161,8 @@ RarityTable.Tiers = {
 		Particles = 60,
 		Sound = "RevealBig",
 		AuraRate = 44,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Divine",
@@ -155,6 +175,8 @@ RarityTable.Tiers = {
 		Particles = 72,
 		Sound = "RevealBig",
 		AuraRate = 56,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Celestial",
@@ -167,6 +189,8 @@ RarityTable.Tiers = {
 		Particles = 90,
 		Sound = "RevealBig",
 		AuraRate = 70,
+		Texture = "",
+		SparkleTexture = "",
 	},
 	{
 		Name = "Secret",
@@ -179,6 +203,8 @@ RarityTable.Tiers = {
 		Particles = 120,
 		Sound = "RevealBig",
 		AuraRate = 90,
+		Texture = "",
+		SparkleTexture = "",
 	},
 } :: { Tier }
 

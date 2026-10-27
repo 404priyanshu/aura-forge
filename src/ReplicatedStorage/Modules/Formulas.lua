@@ -63,6 +63,15 @@ function Formulas.ItemsInTier(index: number): { Item }
 	return itemsByTier[index] or {}
 end
 
+-- Particle textures for a tier: its own, else the Config.Particles defaults.
+-- Returns nil for "not set" (use Roblox's default particle / no twinkle layer).
+function Formulas.TierTextures(tierIndex: number): (string?, string?)
+	local tier = RarityTable.Tiers[tierIndex]
+	local main = if tier.Texture ~= "" then tier.Texture else Config.Particles.DefaultTexture
+	local sparkle = if tier.SparkleTexture ~= "" then tier.SparkleTexture else Config.Particles.DefaultSparkleTexture
+	return (if main ~= "" then main else nil), (if sparkle ~= "" then sparkle else nil)
+end
+
 function Formulas.TierCount(): number
 	return #RarityTable.Tiers
 end

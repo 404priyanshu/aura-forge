@@ -338,6 +338,60 @@ function UIKit.Button(props: ButtonProps): TextButton
 	return button
 end
 
+export type IconProps = {
+	Image: string?,
+	Emoji: string,
+	Size: UDim2,
+	Position: UDim2?,
+	AnchorPoint: Vector2?,
+	TextSize: number?,
+	ImageScale: number?,
+	Name: string?,
+	LayoutOrder: number?,
+	Parent: Instance?,
+}
+
+function UIKit.HasImage(image: string?): boolean
+	return image ~= nil and image ~= ""
+end
+
+-- An icon slot: shows the uploaded image when one is configured (Config.Images),
+-- otherwise falls back to the emoji. ImageScale sizes the image inside the slot.
+function UIKit.Icon(props: IconProps): Frame
+	local holder: Frame = UIKit.Create("Frame", {
+		Name = props.Name or "Icon",
+		Size = props.Size,
+		Position = props.Position or UDim2.new(),
+		AnchorPoint = props.AnchorPoint or Vector2.zero,
+		BackgroundTransparency = 1,
+		LayoutOrder = props.LayoutOrder or 0,
+	})
+	if UIKit.HasImage(props.Image) then
+		local scale = props.ImageScale or 0.8
+		UIKit.Create("ImageLabel", {
+			Name = "Image",
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			Position = UDim2.fromScale(0.5, 0.5),
+			Size = UDim2.fromScale(scale, scale),
+			Image = props.Image,
+			ScaleType = Enum.ScaleType.Fit,
+			Parent = holder,
+		})
+	else
+		UIKit.Create("TextLabel", {
+			Name = "Emoji",
+			Size = UDim2.fromScale(1, 1),
+			Text = props.Emoji,
+			TextSize = props.TextSize or 22,
+			Parent = holder,
+		})
+	end
+	if props.Parent then
+		holder.Parent = props.Parent
+	end
+	return holder
+end
+
 export type Window = {
 	Overlay: TextButton,
 	Frame: Frame,

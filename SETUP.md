@@ -87,9 +87,13 @@ then paste the file contents in.
 | `Config.DevProducts.*.Id` | Luck Potion, Coin Pouch / Chest / Vault, Lucky Tokens x5 |
 | `Config.Audio.Music` | One or more music asset IDs (`"rbxassetid://123"`) |
 | `Config.Audio.Sfx` | Whoosh, RevealSmall, Fanfare, Purchase, Claim, Error (Click/Tick/RevealBig default to sounds built into the Roblox client) |
+| `Config.Images.*` | Optional icon images (currencies, menu, passes, products, boosts, gem shop). Empty = emoji |
+| `Config.Particles` / `RarityTable` `Texture`, `SparkleTexture` | Optional aura particle textures. Empty = Roblox's default particle |
 | `Config.Admins.UserIds` | Your admins' UserIds |
 
 An ID of `0` is safe. The shop shows "Not set up" and nothing prompts.
+
+**Image IDs:** upload images in Studio (**View → Asset Manager → Bulk Import**), then right-click each one → **Copy ID**. The ID of a website "Decal" upload usually won't work as an image ID.
 
 **Creating the products:** open Creator Dashboard → your experience → Monetization → Passes and Developer
 Products. Create each one, copy its ID into Config, and set the price there (the shop reads prices live).

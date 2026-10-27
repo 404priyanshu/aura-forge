@@ -68,7 +68,7 @@ Tip: thumbnails with **one clear focal point and huge contrast** perform best in
 
 ## 2. UI icons (replace the emoji)
 
-**Where it goes:** the UI currently uses emoji (🪙 💎 🎟️ 🎒 🛒 …). Switching to images needs a small code change: add an image-ID slot to `Config.Currencies`, `Config.Gamepasses`, `Config.DevProducts`, `Config.Boosts` and the HUD menu, and use `ImageLabel`s. *Ask Claude to add these hooks before you upload icons.*
+**Where it goes:** `Config.Images` in `src/ReplicatedStorage/Modules/Config.lua`. It has one slot per icon, grouped as `Currencies`, `Menu`, `Gamepasses`, `DevProducts`, `Boosts` and `GemShop`. Paste `"rbxassetid://<id>"` into a slot and that icon replaces its emoji in the HUD, menu, shop and boost chips. Empty slots keep showing the emoji.
 
 **Best tools:** Recraft (best for a **consistent icon set**: lock a style and generate the whole list; also exports SVG), ChatGPT image generation (supports transparent backgrounds directly), Midjourney plus a background remover.
 
@@ -112,7 +112,13 @@ The aura is the thing players chase, so this is where quality matters most.
 
 ### 3a. Particle textures (biggest upgrade for the least effort)
 
-**Where it goes:** `ParticleEmitter.Texture`. Right now the generated auras use Roblox's default particle. Using these needs a small code change (a `Texture` slot per tier in `RarityTable`). *Ask Claude to add it.*
+**Where it goes:** `Config.Particles` in `Config.lua`:
+- `DefaultTexture` is the main aura particle for every rarity, and is also used for the 3D burst on reveal.
+- `DefaultSparkleTexture` is an optional twinkle layer on top.
+
+To give one rarity its own look, set `Texture` / `SparkleTexture` on that tier in `RarityTable.lua`. Empty values fall back to the defaults, and then to Roblox's built-in particle.
+
+These black-background textures only work on 3D particles. Don't use them in UI images, where the black would show.
 
 **Best tools:** any image generator. Generate **white/greyscale on pure black**: the game tints particles to each rarity's colour, so one texture serves all tiers. In Roblox, set `ParticleEmitter.LightEmission` to 1 so the black background disappears.
 
@@ -272,9 +278,9 @@ What to make:
 
 1. **SFX** in `Config.Audio.Sfx` (already wired up, instant payoff).
 2. **Licensed lobby music** from Roblox's library.
-3. **Particle textures** plus the per-tier `Texture` slot (small code change).
+3. **Particle textures** in `Config.Particles` (already wired up).
 4. **Lighting plus a skybox** (no code).
 5. **Roll altar and lobby props.**
 6. **Game icon and thumbnails** (before publishing publicly).
-7. **UI icons** (needs the image-ID hooks).
+7. **UI icons** in `Config.Images` (already wired up).
 8. **3D Mythic+ aura pieces** (needs mesh welding) and **animations**.

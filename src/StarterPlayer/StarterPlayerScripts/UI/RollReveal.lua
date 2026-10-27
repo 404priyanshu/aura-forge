@@ -267,7 +267,7 @@ function RollReveal:_sparks(count: number, colors: { Color3 })
 	end
 end
 
-function RollReveal:_burst3D(color: Color3, count: number)
+function RollReveal:_burst3D(color: Color3, count: number, texture: string?)
 	local character = player.Character
 	local root = character and character:FindFirstChild("HumanoidRootPart")
 	if not root then
@@ -293,6 +293,11 @@ function RollReveal:_burst3D(color: Color3, count: number)
 		NumberSequenceKeypoint.new(1, 1),
 	})
 	emitter.Rate = 0
+	if texture then
+		emitter.Texture = texture
+		emitter.Rotation = NumberRange.new(0, 360)
+		emitter.RotSpeed = NumberRange.new(-120, 120)
+	end
 	emitter.Parent = attachment
 	emitter:Emit(count)
 	task.delay(2, function()
@@ -467,7 +472,7 @@ function RollReveal:Play(result, options: PlayOptions)
 	end
 
 	self:_sparks(tier.Particles, { tier.Color, item.Color, Color3.new(1, 1, 1) })
-	self:_burst3D(tier.Color, tier.Particles)
+	self:_burst3D(tier.Color, tier.Particles, (Formulas.TierTextures(tierIndex)))
 	self:_shake(tier.Shake, 0.35 + tier.Shake * 0.5, options.Shake)
 
 	if tierIndex >= 5 then

@@ -51,11 +51,13 @@ local function pill(parent: Instance, key: string, order: number)
 		Stroke = { Color = currency.Color, Thickness = 1.5, Transparency = 0.45 },
 		Parent = parent,
 	})
-	Create("TextLabel", {
+	UIKit.Icon({
 		Name = "Icon",
+		Image = Config.Images.Currencies[key],
+		Emoji = currency.Icon,
 		Size = UDim2.fromOffset(40, 40),
-		Text = currency.Icon,
 		TextSize = 22,
+		ImageScale = 0.75,
 		Parent = frame,
 	})
 	local label = Create("TextLabel", {
@@ -124,11 +126,13 @@ function Hud.new(root: Instance, ctx)
 			Corner = 14,
 			Parent = menu,
 		})
-		Create("TextLabel", {
+		UIKit.Icon({
+			Image = Config.Images.Menu[entry.Name],
+			Emoji = entry.Icon,
 			Size = UDim2.new(1, 0, 0, 30),
 			Position = UDim2.fromOffset(0, 5),
-			Text = entry.Icon,
 			TextSize = 24,
+			ImageScale = 1,
 			Parent = button,
 		})
 		Create("TextLabel", {
@@ -474,6 +478,8 @@ function Hud:_renderBoosts()
 		local info = Config.Boosts[boostId]
 		if info and remaining > 0 then
 			seen[boostId] = true
+			local image = Config.Images.Boosts[boostId]
+			local hasImage = UIKit.HasImage(image)
 			local chip = self.BoostList:FindFirstChild(boostId)
 			if not chip then
 				chip = Create("TextLabel", {
@@ -486,11 +492,23 @@ function Hud:_renderBoosts()
 					Stroke = { Color = Theme.Accent, Thickness = 1, Transparency = 0.4 },
 					Parent = self.BoostList,
 				})
+				if hasImage then
+					Create("ImageLabel", {
+						Name = "Icon",
+						AnchorPoint = Vector2.new(0, 0.5),
+						Position = UDim2.new(0, 8, 0.5, 0),
+						Size = UDim2.fromOffset(20, 20),
+						Image = image,
+						ScaleType = Enum.ScaleType.Fit,
+						Parent = chip,
+					})
+				end
 				UIKit.Pop(chip)
 			end
 			local multiplier = info.LuckMultiplier or info.CoinMultiplier or 1
 			local kind = if info.LuckMultiplier then "luck" else "coins"
-			chip.Text = `{info.Icon} x{multiplier} {kind} · {Util.Clock(remaining)}`
+			local prefix = if hasImage then "" else info.Icon .. " "
+			chip.Text = `{prefix}x{multiplier} {kind} · {Util.Clock(remaining)}`
 		end
 	end
 	for _, chip in self.BoostList:GetChildren() do

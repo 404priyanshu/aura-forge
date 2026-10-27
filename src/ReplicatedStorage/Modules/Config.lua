@@ -558,6 +558,33 @@ Config.Audio = {
 }
 
 ---------------------------------------------------------------------------
+-- ICON IMAGES
+-- Paste "rbxassetid://<id>" (Studio → View → Asset Manager → right-click
+-- the image → Copy ID). Use transparent PNGs, about 512×512.
+-- Leave "" to keep showing the emoji Icon defined above.
+---------------------------------------------------------------------------
+Config.Images = {
+	Currencies = { Coins = "", Gems = "", RerollTokens = "" },
+	Menu = { Inventory = "", Shop = "", Quests = "", Daily = "", Settings = "" },
+	Gamepasses = { LuckX2 = "", AutoRoll = "", FastRoll = "", ExtraSlots = "", VIP = "" },
+	DevProducts = { LuckPotion = "", CoinsSmall = "", CoinsMedium = "", CoinsLarge = "", RerollTokens = "" },
+	Boosts = { LuckPotion = "", LuckyBrew = "", CoinCharm = "" },
+	GemShop = { LuckyBrew = "", CoinCharm = "", Token = "" },
+} :: { [string]: { [string]: string } }
+
+---------------------------------------------------------------------------
+-- PARTICLE TEXTURES (character auras + the 3D burst on reveal)
+-- White/grey on pure black images: the game tints them to each rarity's
+-- colour and the black background becomes invisible. "" = Roblox's
+-- default particle. A tier can override these in RarityTable
+-- (Texture / SparkleTexture).
+---------------------------------------------------------------------------
+Config.Particles = {
+	DefaultTexture = "", -- main aura particle
+	DefaultSparkleTexture = "", -- optional twinkle layer on top ("" = no twinkle layer)
+}
+
+---------------------------------------------------------------------------
 -- UI
 ---------------------------------------------------------------------------
 Config.UI = {

@@ -74,7 +74,39 @@ local function buildGeneratedAura(item: RarityTable.Item, parent: Instance)
 	})
 	emitter.Shape = Enum.ParticleEmitterShape.Sphere
 	emitter.ShapeStyle = Enum.ParticleEmitterShapeStyle.Surface
+
+	local texture, sparkleTexture = Formulas.TierTextures(tierIndex)
+	if texture then
+		emitter.Texture = texture
+		emitter.LightEmission = 1 -- the texture's black background becomes invisible
+		emitter.Rotation = NumberRange.new(0, 360)
+		emitter.RotSpeed = NumberRange.new(-40, 40)
+	end
 	emitter.Parent = attachment
+
+	-- Optional twinkle layer: small particles that pop in and out.
+	if sparkleTexture then
+		local sparkles = Instance.new("ParticleEmitter")
+		sparkles.Name = "AuraSparkles"
+		sparkles.Texture = sparkleTexture
+		sparkles.Color = ColorSequence.new(Color3.new(1, 1, 1), item.Color)
+		sparkles.LightEmission = 1
+		sparkles.LightInfluence = 0
+		sparkles.Rate = math.max(2, tier.AuraRate * 0.4)
+		sparkles.Lifetime = NumberRange.new(0.4, 0.9)
+		sparkles.Speed = NumberRange.new(0.5, 2)
+		sparkles.SpreadAngle = Vector2.new(180, 180)
+		sparkles.Rotation = NumberRange.new(0, 360)
+		sparkles.RotSpeed = NumberRange.new(-90, 90)
+		sparkles.Size = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 0),
+			NumberSequenceKeypoint.new(0.3, 0.2 + tierIndex * 0.03),
+			NumberSequenceKeypoint.new(1, 0),
+		})
+		sparkles.Shape = Enum.ParticleEmitterShape.Sphere
+		sparkles.ShapeStyle = Enum.ParticleEmitterShapeStyle.Surface
+		sparkles.Parent = attachment
+	end
 
 	if tierIndex >= 4 then
 		local light = Instance.new("PointLight")
