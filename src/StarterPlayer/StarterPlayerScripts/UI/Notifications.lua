@@ -91,7 +91,7 @@ function Notifications.new(root: Instance)
 		Parent = self.PopupFrame,
 	})
 	self.PopupBody = Create("TextLabel", {
-		Size = UDim2.new(1, 0, 0, 0),
+		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Text = "",
 		TextSize = 19,
@@ -143,7 +143,7 @@ function Notifications:Toast(text: string, color: Color3?)
 		Parent = toast,
 	})
 	local label = Create("TextLabel", {
-		Size = UDim2.new(1, 0, 0, 0),
+		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Text = text,
 		TextSize = 16,

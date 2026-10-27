@@ -17,10 +17,11 @@ env:
   # Keep in sync with rokit.toml.
   ROJO_VERSION: 7.7.1
   LUAU_LSP_VERSION: 1.70.1
+  SELENE_VERSION: 0.32.0
 
 jobs:
   analyze:
-    name: Type check (luau-lsp)
+    name: Type check & lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -32,10 +33,11 @@ jobs:
           path: |
             ~/.local/bin/rojo
             ~/.local/bin/luau-lsp
+            ~/.local/bin/selene
             .cache
-          key: luau-tools-${{ runner.os }}-rojo${{ env.ROJO_VERSION }}-lsp${{ env.LUAU_LSP_VERSION }}
+          key: luau-tools-${{ runner.os }}-rojo${{ env.ROJO_VERSION }}-lsp${{ env.LUAU_LSP_VERSION }}-selene${{ env.SELENE_VERSION }}
 
-      - name: Install Rojo and luau-lsp
+      - name: Install Rojo, luau-lsp and selene
         run: |
           mkdir -p ~/.local/bin
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
@@ -48,6 +50,16 @@ jobs:
             curl -fsSL -o luau-lsp.zip "https://github.com/JohnnyMorganz/luau-lsp/releases/download/${LUAU_LSP_VERSION}/luau-lsp-linux-x86_64.zip"
             unzip -o -q luau-lsp.zip -d luau-lsp && install luau-lsp/luau-lsp ~/.local/bin/luau-lsp
           fi
+          if [[ ! -x ~/.local/bin/selene ]]; then
+            # Full build (not "selene-light"): it can generate the Roblox standard library.
+            curl -fsSL -o selene.zip "https://github.com/Kampfkarren/selene/releases/download/${SELENE_VERSION}/selene-${SELENE_VERSION}-linux.zip"
+            unzip -o -q selene.zip -d selene && install selene/selene ~/.local/bin/selene
+          fi
 
       - name: Run luau-lsp analyze
         run: ./scripts/analyze.sh
+
+      - name: Lint (selene)
+        # Fails on warnings as well as errors. Rules: selene.toml.
+        if: ${{ !cancelled() }}
+        run: selene src

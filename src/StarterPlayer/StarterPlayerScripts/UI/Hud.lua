@@ -262,7 +262,7 @@ function Hud.new(root: Instance, ctx)
 	self.AfkChip = Create("Frame", {
 		Name = "AfkChip",
 		AnchorPoint = Vector2.new(0.5, 0),
-		Position = UDim2.new(0.5, 0, 0, 0),
+		Position = UDim2.fromScale(0.5, 0),
 		Size = UDim2.fromOffset(260, 30),
 		BackgroundColor3 = Color3.fromRGB(80, 60, 200),
 		Visible = false,
@@ -329,7 +329,7 @@ function Hud.new(root: Instance, ctx)
 	local buttons = Create("Frame", {
 		Name = "Buttons",
 		AnchorPoint = Vector2.new(0.5, 1),
-		Position = UDim2.new(0.5, 0, 1, 0),
+		Position = UDim2.fromScale(0.5, 1),
 		Size = UDim2.new(1, 0, 0, 86),
 		BackgroundTransparency = 1,
 		Parent = bottom,
@@ -374,7 +374,7 @@ function Hud.new(root: Instance, ctx)
 	self.CooldownBar = Create("Frame", {
 		Name = "Cooldown",
 		AnchorPoint = Vector2.new(0, 1),
-		Position = UDim2.new(0, 0, 1, 0),
+		Position = UDim2.fromScale(0, 1),
 		Size = UDim2.fromScale(0, 0.08),
 		BackgroundColor3 = Color3.new(1, 1, 1),
 		BackgroundTransparency = 0.4,

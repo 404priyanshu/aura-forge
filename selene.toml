@@ -1,0 +1,7 @@
+# selene lint config (https://kampfkarren.github.io/selene/).
+# "roblox" makes selene aware of Roblox globals, services and APIs; selene
+# downloads the API definitions itself on first run.
+std = "roblox"
+
+# Third-party code is not ours to lint.
+exclude = ["src/ServerScriptService/Packages/*"]
